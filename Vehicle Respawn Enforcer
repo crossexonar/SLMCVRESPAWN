@@ -2,6 +2,7 @@ vector hspawn = <0,0,0>;//Put your spawn here Ignoring Z
 vector espawn = <256,256,0>;//Enemy spawn here ignoring Z
 float spawndist = 30; //Distance around the spawn areas to consider checking for a vehicle, and safe area to no be unsat in
 float speedlimit = 30; //distance at which a vehicle needs to travel to be considered "dead" within 1 second.
+float modifier = 5; //HP / Second modifier.
 integer online = 1;
 integer planeseconds = 15;
 integer tankseconds = 30;
@@ -182,15 +183,15 @@ default
                                                 {
 
 
-                                                    if (llGetSubString(desc, 0, 9) == "LBA.v.MLBA")
+                                                    /*if (llGetSubString(desc, 0, 9) == "LBA.v.MLBA")
                                                     {
                                                         secondscounter = 60;
                                                         //llOwnerSay("MLBA Detected");
                                                     }
                                                     else
-                                                    {
-                                                        secondscounter = llRound(maxhp / 5);
-                                                    }
+                                                    {*/
+                                                        secondscounter = llCeil(maxhp / modifier);
+                                                    //}
                                                     if (secondscounter < tankseconds) secondscounter = tankseconds;
                                                     //llOwnerSay("Vehicle Cost: "+(string)secondscounter);
                                                     //llSetText((string)llVecDist(ownerpos,vehiclepos)+ "\n" + (string)secondscost + "\n" + llKey2Name(vehiclerezzer),<1,1,1>,1);
